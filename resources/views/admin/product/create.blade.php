@@ -8,13 +8,20 @@
                 <div class="card-header">New Product</div>
                 <div class="card-body">
                     <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data">
-                    
-                        <label>Title:</label>
-                        <input type="text" name="product_title">
+                        <div class="form-group">
+                            <label>Title:</label>
+                            <input type="text" name="product_title" class="form-control">
 
+                            <label>Price:</label>
+                            <input type="number" step="0.01" name="product_price" class="form-control">
+
+                            <label>Description: </label>
+                            <textarea type="text" name="product_description" class="form-control"></textarea>
+                        </div>
                         <div id="product-photo-inputs-area">
-                            <hr><br><input type="file" name="photo[]">
-
+                            <hr><br><input type="file" name="photo[]" class="form-control">
+                            <label>Alt:</label>
+                            <input type="text" name="image_alt[]" class="form-control">
                         </div>
 
 

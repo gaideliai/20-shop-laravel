@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Image;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -42,15 +43,17 @@ class ProductController extends Controller
         $product->description = $request->product_description;
         $product->save();
         
-        foreach ($request->file('photo') as $image) {
-            $name = $image->getClientOriginalName();
+        foreach ($request->file('photo') as $key => $uploaded_image) {
+            $name = $uploaded_image->getClientOriginalName();
             $destinationPath = public_path('/images/products');
-            $image->move($destinationPath, $name);
-
-            $photo = new Image;
-            $photo->photo = $name;
-            $photo->product_id = $product->id;
-            $photo->save();            
+            $uploaded_image->move($destinationPath, $name);
+            // dd($request->image_alt);
+            $image = new Image;
+            $image->image = $name;
+            $image->alt = $request->image_alt[$key];
+            $image->no = $key;
+            $image->product_id = $product->id;
+            $image->save();            
         }
         return redirect()->route('product.index');
     }

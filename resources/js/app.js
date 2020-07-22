@@ -31,15 +31,18 @@ require('./bootstrap');
 //     el: '#app',
 // });
 
-const productPhotoInput = '<hr><br><input type="file" name="photo[]"></input>';
+const productPhotoInput = `<hr><br><input type="file" name="photo[]">
+                        </input><label>Alt:</label>
+                        <input type="text" name="image_alt[]" class="form-control">`;
 
 const addPhotoButton = document.querySelector('#add-product-photo');
 const productPhotoInputsArea = document.querySelector('#product-photo-inputs-area');
 
 if (addPhotoButton) {
     addPhotoButton.addEventListener("click", () => {
-        const input = document.createElement('span');
-        input.innerHTML = productPhotoInput;
-        productPhotoInputsArea.appendChild(input);
+        productPhotoInputsArea.insertAdjacentHTML('beforeend', productPhotoInput);
+        // const input = document.createElement('span');
+        // input.innerHTML = productPhotoInput;
+        // productPhotoInputsArea.appendChild(input);
     });
 }
