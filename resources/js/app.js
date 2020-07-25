@@ -41,8 +41,19 @@ const productPhotoInputsArea = document.querySelector('#product-photo-inputs-are
 if (addPhotoButton) {
     addPhotoButton.addEventListener("click", () => {
         productPhotoInputsArea.insertAdjacentHTML('beforeend', productPhotoInput);
-        // const input = document.createElement('span');
-        // input.innerHTML = productPhotoInput;
-        // productPhotoInputsArea.appendChild(input);
     });
 }
+
+const swiper = new Swiper('.swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });

@@ -6,3 +6,30 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    .swiper-slide {
+        width: 1000px;
+        height: 300px;
+        border-radius: 10px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+}
+#slide1 {
+    background-image: url(https://cdn.dodostatic.net/static/Img/Banners/9c2a302808424ba19e0a809480dc56dd.jpeg);
+}
+  
+#slide2 {
+    background-image: url(https://cdn.dodostatic.net/static/Img/Banners/g_1592631443_7e40393bd9a94fd4ad115b9f88dd8499.jpeg);
+}
+
+#slide3 {
+    background-image: url(https://cdn.dodostatic.net/static/Img/Banners/00262c6a3564427d850992109f90375a.jpeg);
+}
+  

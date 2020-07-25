@@ -37308,11 +37308,23 @@ var productPhotoInputsArea = document.querySelector('#product-photo-inputs-area'
 
 if (addPhotoButton) {
   addPhotoButton.addEventListener("click", function () {
-    productPhotoInputsArea.insertAdjacentHTML('beforeend', productPhotoInput); // const input = document.createElement('span');
-    // input.innerHTML = productPhotoInput;
-    // productPhotoInputsArea.appendChild(input);
+    productPhotoInputsArea.insertAdjacentHTML('beforeend', productPhotoInput);
   });
 }
+
+var swiper = new Swiper('.swiper-container', {
+  slidesPerView: 1,
+  spaceBetween: 30,
+  loop: true,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev'
+  }
+});
 
 /***/ }),
 
