@@ -6,6 +6,29 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import '~swiper/swiper';
+
+.dodo-logo {
+    .logo-img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.cart-button {
+    background-color: orangered;
+    color: #fff !important;
+    font-weight: 800;
+    border-radius: 10px;
+    #cart-count {
+        border-left: 1px solid #fff;
+        margin-left: 10px;
+        padding-left: 10px;
+        .count {
+            margin-right: 5px;
+        }
+    }
+}
 
 .swiper-container {
     width: 100%;
@@ -15,12 +38,22 @@
     .swiper-slide {
         width: 1000px;
         height: 300px;
-        border-radius: 10px;
         background-position: center;
-        background-repeat: no-repeat;
         background-size: contain;
+        #slide1, #slide2, #slide3 {
+            width: 1000px;
+            height: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 20px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
     }
+    
 }
+
 #slide1 {
     background-image: url(https://cdn.dodostatic.net/static/Img/Banners/9c2a302808424ba19e0a809480dc56dd.jpeg);
 }
@@ -32,4 +65,32 @@
 #slide3 {
     background-image: url(https://cdn.dodostatic.net/static/Img/Banners/00262c6a3564427d850992109f90375a.jpeg);
 }
-  
+
+.add-to-cart-button {
+    background-color: #fff;
+    color: orangered;
+    font-weight: 800;
+    border-radius: 7px;
+    border: 1px solid orangered;
+    padding: 6px 20px;
+    
+}
+.navbar-nav.ml-auto {
+    position: relative;
+    .mini-cart-list {
+        position: absolute;
+        width: 300px;
+        top: 40px;
+        right: 0px;
+        background: #fff;
+        display: none;
+        border-radius: 10px;
+        padding: 30px 0px;
+    }
+    &:hover {
+        .mini-cart-list {
+            display: block;
+            z-index: 2;
+        }
+    }
+}
