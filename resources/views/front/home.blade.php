@@ -33,7 +33,7 @@
                         <img src="{{asset('images/products/'.$image->image)}}" alt="{{$image->alt}}" style="width: 250px; height: auto;">
                     @endforeach
                     <form action="{{route('front.add')}}" method="post">
-                        <input type="number" name="count" value="0">
+                        <input type="hidden" name="count" value="1">
                         <input type="hidden" name="product_id" value="{{$product->id}}">
                         <button class="add-to-cart-button" type="submit">Dėti į krepšelį</button>
                         @csrf

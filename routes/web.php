@@ -33,3 +33,6 @@ Route::group(['prefix' => 'admin/products'], function(){
 
  Route::get('/', 'FrontController@home')->name('front.home');
  Route::post('add', 'FrontController@add')->name('front.add');
+ Route::post('remove', 'FrontController@remove')->name('front.remove');
+ Route::post('plus', 'FrontController@plus')->name('front.plus');
+ Route::post('minus', 'FrontController@minus')->name('front.minus');

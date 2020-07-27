@@ -25,4 +25,16 @@ class FrontController extends Controller
         $cart->removeFromCart();
         return redirect()->back();    
     }
+
+    public function plus(CartService $cart)
+    {
+        $cart->plus();
+        return redirect()->back();    
+    }
+
+    public function minus(CartService $cart)
+    {
+        $cart->minus();
+        return redirect()->back();    
+    }
 }

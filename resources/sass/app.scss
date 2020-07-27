@@ -6,6 +6,7 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import '~swiper/swiper-bundle.css';
 @import '~swiper/swiper';
 
 .dodo-logo {
@@ -72,20 +73,38 @@
     font-weight: 800;
     border-radius: 7px;
     border: 1px solid orangered;
-    padding: 6px 20px;
-    
+    padding: 6px 20px;   
 }
+
 .navbar-nav.ml-auto {
     position: relative;
     .mini-cart-list {
         position: absolute;
-        width: 300px;
+        width: 250px;
         top: 40px;
         right: 0px;
         background: #fff;
         display: none;
         border-radius: 10px;
-        padding: 30px 0px;
+        padding: 30px 10px 0px 0px;
+        .sum {
+            width: 100%;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid #333;
+        }
+        .mini-cart-button {
+            background-color: #fff;
+            color: orangered;
+            font-weight: 800;
+            border-radius: 7px;
+            border: 1px solid orangered;
+            padding: 6px 16px;
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
     }
     &:hover {
         .mini-cart-list {

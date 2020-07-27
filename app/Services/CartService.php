@@ -53,4 +53,23 @@ class CartService
 
         Session::put('cart', $cart);
     }
+
+    public function plus() {
+        $cart = Session::get('cart', []);
+        $product = Product::where('id', $this->request->product_id)->first();
+        $cart[$product->id] = ['count'=>$cart[$product->id]['count'] + 1, 'id'=>$product->id, 'price'=>$product->price*($cart[$product->id]['count']+1)];
+        Session::put('cart', $cart);
+    }
+
+    public function minus() {
+        $cart = Session::get('cart', []);
+        $product = Product::where('id', $this->request->product_id)->first();
+        if ($cart[$product->id]['count'] > 1) {
+            $cart[$product->id] = ['count'=>$cart[$product->id]['count'] - 1, 'id'=>$product->id, 'price'=>$product->price*($cart[$product->id]['count']-1)];
+        } else {
+            unset($cart[$this->request->product_id]);
+        }       
+        
+        Session::put('cart', $cart);
+    }
 }
