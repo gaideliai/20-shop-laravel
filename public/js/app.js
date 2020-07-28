@@ -47926,6 +47926,9 @@ module.exports = function(module) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/swiper.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
 
 swiper__WEBPACK_IMPORTED_MODULE_0__["default"].use([swiper__WEBPACK_IMPORTED_MODULE_0__["Navigation"], swiper__WEBPACK_IMPORTED_MODULE_0__["Pagination"]]);
 /**
@@ -47957,7 +47960,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // window
 // });
 
 
-var productPhotoInput = "<hr><br><input type=\"file\" name=\"photo[]\">\n                        </input><label>Alt:</label>\n                        <input type=\"text\" name=\"image_alt[]\" class=\"form-control\">";
+var productPhotoInput = "<hr><br><input type=\"file\" name=\"photo[]\"><br>\n                          <label>Alt:</label>\n                          <input type=\"text\" name=\"image_alt[]\" class=\"form-control\">";
 var addPhotoButton = document.querySelector('#add-product-photo');
 var productPhotoInputsArea = document.querySelector('#product-photo-inputs-area');
 
@@ -47979,6 +47982,24 @@ var swiper = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"]('.swiper-contain
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev'
   }
+});
+document.querySelectorAll('.add-to-cart-button').forEach(function (button) {
+  button.addEventListener("click", function () {
+    var form = button.closest('.form');
+    var route = form.querySelector('[name=route]').value;
+    var id = form.querySelector('[name=product_id]').value;
+    var count = form.querySelector('[name=count]').value;
+    axios.post(route, {
+      product_id: id,
+      count: count
+    }).then(function (response) {
+      var cart = document.querySelector('#mini-cart');
+      cart.innerHTML = response.data.html;
+      console.log(response);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  });
 });
 
 /***/ }),

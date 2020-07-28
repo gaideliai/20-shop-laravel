@@ -20,6 +20,15 @@ class FrontController extends Controller
         return redirect()->back();    
     }
 
+    public function addJS(CartService $cart)
+    {
+        $cart->addToCart();
+        $miniCartHTML = view('front.mini-cart', $cart->getCart())->render();
+        return response()->json([
+            'html' => $miniCartHTML
+        ]);    
+    }
+
     public function remove(CartService $cart)
     {
         $cart->removeFromCart();

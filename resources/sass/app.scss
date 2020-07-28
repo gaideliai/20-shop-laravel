@@ -36,6 +36,7 @@
     height: 100%;
     margin-left: auto;
     margin-right: auto;
+    
     .swiper-slide {
         width: 1000px;
         height: 300px;
@@ -50,6 +51,20 @@
             background-position: center;
             background-repeat: no-repeat;
             background-size: contain;
+            
+        }
+    }
+    .swiper-pagination-bullet-active {
+        background: #aaa;
+    }
+    .swiper-button-next, .swiper-button-prev {
+        width: calc(var(--swiper-navigation-size));
+        background: var(--dark);
+        border-radius: 50%;
+        color: #aaa;
+        &:after {
+            font-size: 12px;
+            font-weight: bold;
         }
     }
     

@@ -31,8 +31,20 @@ Route::group(['prefix' => 'admin/products'], function(){
     Route::get('show/{product}', 'ProductController@show')->name('product.show');
  });
 
+ Route::group(['prefix' => 'admin/cats'], function(){
+    Route::get('', 'CatController@index')->name('cat.index');
+    Route::get('create', 'CatController@create')->name('cat.create');
+    Route::post('store', 'CatController@store')->name('cat.store');
+    Route::post('tagStore', 'CatController@store')->name('tag.store');
+    Route::get('edit/{cat}', 'CatController@edit')->name('cat.edit');
+    Route::post('update/{cat}', 'CatController@update')->name('cat.update');
+    Route::post('delete/{cat}', 'CatController@destroy')->name('cat.destroy');
+    Route::get('show/{cat}', 'CatController@show')->name('cat.show');
+ });
+
  Route::get('/', 'FrontController@home')->name('front.home');
  Route::post('add', 'FrontController@add')->name('front.add');
+ Route::post('add-js', 'FrontController@addJS')->name('front.add-js');
  Route::post('remove', 'FrontController@remove')->name('front.remove');
  Route::post('plus', 'FrontController@plus')->name('front.plus');
  Route::post('minus', 'FrontController@minus')->name('front.minus');

@@ -24,7 +24,7 @@ class CatController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category.create');
     }
 
     /**
@@ -35,7 +35,11 @@ class CatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new Cat;
+        $category->title = $request->cat_title;
+        $category->parent_id = $request->parent_id;
+        $category->save();
+        return redirect()->back();
     }
 
     /**

@@ -32,12 +32,13 @@
                     @foreach ($product->getImages as $image)
                         <img src="{{asset('images/products/'.$image->image)}}" alt="{{$image->alt}}" style="width: 250px; height: auto;">
                     @endforeach
-                    <form action="{{route('front.add')}}" method="post">
+                    <div class="form">
+                        <input type="hidden" name="route" value="{{route('front.add-js')}}">
                         <input type="hidden" name="count" value="1">
                         <input type="hidden" name="product_id" value="{{$product->id}}">
-                        <button class="add-to-cart-button" type="submit">Dėti į krepšelį</button>
+                        <button class="add-to-cart-button" type="button">Dėti į krepšelį</button>
                         @csrf
-                    </form>
+                    </div>
                     
                 </div>
             </div>

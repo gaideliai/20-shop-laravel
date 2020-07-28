@@ -19,7 +19,7 @@
                             <textarea type="text" name="product_description" class="form-control"></textarea>
                         </div>
                         <div id="product-photo-inputs-area">
-                            <hr><br><input type="file" name="photo[]" class="form-control">
+                            <hr><br><input type="file" name="photo[]"><br>
                             <label>Alt:</label>
                             <input type="text" name="image_alt[]" class="form-control">
                         </div>

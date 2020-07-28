@@ -11670,6 +11670,24 @@ a.text-dark:focus {
   background-size: contain;
 }
 
+.swiper-container .swiper-pagination-bullet-active {
+  background: #aaa;
+}
+
+.swiper-container .swiper-button-next,
+.swiper-container .swiper-button-prev {
+  width: calc(var(--swiper-navigation-size));
+  background: var(--dark);
+  border-radius: 50%;
+  color: #aaa;
+}
+
+.swiper-container .swiper-button-next:after,
+.swiper-container .swiper-button-prev:after {
+  font-size: 12px;
+  font-weight: bold;
+}
+
 #slide1 {
   background-image: url(https://cdn.dodostatic.net/static/Img/Banners/9c2a302808424ba19e0a809480dc56dd.jpeg);
 }

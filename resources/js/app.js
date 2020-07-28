@@ -1,4 +1,5 @@
 import Swiper, { Navigation, Pagination } from 'swiper';
+import Axios from 'axios';
 Swiper.use([Navigation, Pagination]);
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -33,16 +34,16 @@ require('./bootstrap');
 //     el: '#app',
 // });
 
-const productPhotoInput = `<hr><br><input type="file" name="photo[]">
-                        </input><label>Alt:</label>
-                        <input type="text" name="image_alt[]" class="form-control">`;
+const productPhotoInput = `<hr><br><input type="file" name="photo[]"><br>
+                          <label>Alt:</label>
+                          <input type="text" name="image_alt[]" class="form-control">`;
 
 const addPhotoButton = document.querySelector('#add-product-photo');
 const productPhotoInputsArea = document.querySelector('#product-photo-inputs-area');
 
 if (addPhotoButton) {
     addPhotoButton.addEventListener("click", () => {
-        productPhotoInputsArea.insertAdjacentHTML('beforeend', productPhotoInput);
+    productPhotoInputsArea.insertAdjacentHTML('beforeend', productPhotoInput);
     });
 }
 
@@ -59,3 +60,28 @@ const swiper = new Swiper('.swiper-container', {
       prevEl: '.swiper-button-prev',
     },
   });
+
+  
+  document.querySelectorAll('.add-to-cart-button').forEach((button) => {
+    button.addEventListener("click", () => {
+    const form = button.closest('.form');
+    const route = form.querySelector('[name=route]').value;
+    const id = form.querySelector('[name=product_id]').value;
+    const count = form.querySelector('[name=count]').value;
+
+    axios.post(route, {
+      product_id: id,
+      count: count
+    })
+    .then(function(response) {        
+      const cart = document.querySelector('#mini-cart');
+      cart.innerHTML = response.data.html;
+      console.log(response);
+    })
+    .catch(function(error) {
+      console.log(error);
+    })
+
+    });
+  })
+  
