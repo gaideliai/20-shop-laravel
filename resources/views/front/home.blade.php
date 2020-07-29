@@ -45,5 +45,25 @@
         </div>
     </div>
     @endforeach
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Pirk</div>
+                <div class="card-body">
+                    <form action="{{route('front.buy')}}" method="POST" class="form-group">
+                        <label for="">Name</label>
+                        <input type="text" name="name" value="" class="form-control">
+                        <label for="">Email</label>
+                        <input type="text" name="email" value="" class="form-control">
+                        <label for="">Phone</label>
+                        <input type="text" name="phone" value="" class="form-control">
+                        <button class="add-to-cart-button" type="submit">Pirkti</button>
+                        @csrf
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

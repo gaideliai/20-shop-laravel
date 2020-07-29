@@ -11722,6 +11722,7 @@ a.text-dark:focus {
   display: none;
   border-radius: 10px;
   padding: 30px 10px 0px 0px;
+  box-shadow: 0 2px 4px #3335;
 }
 
 .navbar-nav.ml-auto .mini-cart-list .sum {

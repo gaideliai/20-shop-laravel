@@ -48,3 +48,9 @@ Route::group(['prefix' => 'admin/products'], function(){
  Route::post('remove', 'FrontController@remove')->name('front.remove');
  Route::post('plus', 'FrontController@plus')->name('front.plus');
  Route::post('minus', 'FrontController@minus')->name('front.minus');
+ Route::post('buy', 'FrontController@buy')->name('front.buy');
+
+ Route::get('paysera/accept', 'FrontController@payseraAccept')->name('paysera.accept');
+ Route::get('paysera/cancel', 'FrontController@payseraCancel')->name('paysera.cancel');
+ 
+ Route::post('paysera/callback', 'FrontController@payseraCallback')->name('paysera.callback');
