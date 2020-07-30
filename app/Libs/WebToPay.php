@@ -946,9 +946,9 @@ class WebToPay_Util {
     public function parseHttpQuery($query) {
         $params = array();
         parse_str($query, $params);
-        if (get_magic_quotes_gpc()) {
-            $params = $this->stripSlashesRecursively($params);
-        }
+        // if (get_magic_quotes_gpc()) {
+        //     $params = $this->stripSlashesRecursively($params);
+        // }
         return $params;
     }
 

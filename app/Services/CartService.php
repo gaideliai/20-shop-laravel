@@ -72,4 +72,8 @@ class CartService
         
         Session::put('cart', $cart);
     }
+
+    public function empty() {
+        Session::forget('cart');
+    }
 }
