@@ -5,23 +5,24 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">New Product</div>
+                <div class="card-header">Edit Product</div>
                 <div class="card-body">
-                    <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('product.update', [$product->id])}}" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>Title:</label>
-                            <input type="text" name="product_title" class="form-control">
+                            <input type="text" name="product_title" value="{{$product->title}}" class="form-control">
 
                             <label>Price:</label>
-                            <input type="number" step="0.01" name="product_price" class="form-control">
+                            <input type="number" step="0.01" name="product_price" value="{{$product->price}}" class="form-control">
 
                             <label>Description: </label>
-                            <textarea type="text" name="product_description" class="form-control"></textarea>
+                            <textarea type="text" name="product_description" class="form-control">{{$product->description}}</textarea>
                             <hr><br>
                             <label>Category: </label>
                             <select class="form-control" name="cat[]">
                                 @foreach ($cats as $category)
-                                    <option value="{{$category->id}}">{{$category->title}}</option>
+                                    <option value="{{$category->id}}" @if($category->id == $product->getCat->first()->catRelation->id) selected @endif>
+                                    {{$category->title}}</option>
                                 @endforeach
                             </select>
                             <hr><br>

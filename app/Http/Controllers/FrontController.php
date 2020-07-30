@@ -72,20 +72,52 @@ class FrontController extends Controller
         try {            
          
             return redirect(WebToPay::redirectToPayment(array(
-                'projectid'     => 0,
-                'sign_password' => 'd41d8cd98f00b204e9800998ecf8427e',
-                'orderid'       => 'Pica-'.$order->id,
+                'projectid'     => 181640,
+                'sign_password' => '7a454e7433a5d90aa84b5cf9988aabd4',
+                'orderid'       => $order->id,
                 'amount'        => (int)$order->total*100,
                 'currency'      => 'EUR',
                 'country'       => 'LT',
-                'accepturl'     => $self_url.'/accept.php',
-                'cancelurl'     => $self_url.'/cancel.php',
-                'callbackurl'   => $self_url.'/callback.php',
+                'accepturl'     => route('paysera.accept'),
+                'cancelurl'     => route('paysera.cancel'),
+                'callbackurl'   => route('paysera.callback'),
                 'test'          => 1,
             )));
         } catch (WebToPayException $e) {
             // handle exception
         } 
 
+    }
+
+    public function payseraAccept() {
+        try {
+            $response = WebToPay::checkResponse($_GET, array(
+                'projectid'     => 0,
+                'sign_password' => 'd41d8cd98f00b204e9800998ecf8427e',
+            ));
+     
+            $orderId = $response['orderid'];
+            $amount = $response['amount'];
+            $currency = $response['currency'];
+
+            $order = Order::where('id', $orderId)->first();
+            if ($amount == (int) ($order->total*100) && $currency == 'EUR' && $order->status == 1) {
+                $order->status = 2;
+                $order->save();
+            }
+
+            //@todo: check, if order with $orderId is already approved (callback can be repeated several times)
+            //@todo: check, if order amount and currency matches $amount and $currency
+            //@todo: confirm order
+     
+            //echo 'OK';
+        } catch (Exception $e) {
+                echo get_class($e) . ': ' . $e->getMessage();
+        }
+        return redirect()->route('all.good');
+    }
+
+    public function allGood() {
+        return view('front.all-good');
     }
 }

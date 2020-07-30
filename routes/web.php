@@ -35,9 +35,11 @@ Route::group(['prefix' => 'admin/products'], function(){
     Route::get('', 'CatController@index')->name('cat.index');
     Route::get('create', 'CatController@create')->name('cat.create');
     Route::post('store', 'CatController@store')->name('cat.store');
-    Route::post('tagStore', 'CatController@store')->name('tag.store');
+    Route::post('tagStore', 'CatController@tagStore')->name('tag.store');
     Route::get('edit/{cat}', 'CatController@edit')->name('cat.edit');
+    Route::get('tag-edit/{tag}', 'CatController@tagEdit')->name('tag.edit');
     Route::post('update/{cat}', 'CatController@update')->name('cat.update');
+    Route::post('tagUpdate/{tag}', 'CatController@tagUpdate')->name('tag.update');
     Route::post('delete/{cat}', 'CatController@destroy')->name('cat.destroy');
     Route::get('show/{cat}', 'CatController@show')->name('cat.show');
  });
@@ -50,6 +52,7 @@ Route::group(['prefix' => 'admin/products'], function(){
  Route::post('minus', 'FrontController@minus')->name('front.minus');
  Route::post('buy', 'FrontController@buy')->name('front.buy');
 
+ Route::get('all-good', 'FrontController@allGood')->name('all.good');
  Route::get('paysera/accept', 'FrontController@payseraAccept')->name('paysera.accept');
  Route::get('paysera/cancel', 'FrontController@payseraCancel')->name('paysera.cancel');
  

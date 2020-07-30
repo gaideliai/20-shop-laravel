@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cat;
 use Illuminate\Http\Request;
+use App\Tag;
 
 class CatController extends Controller
 {
@@ -42,6 +43,15 @@ class CatController extends Controller
         return redirect()->back();
     }
 
+    public function tagStore(Request $request)
+    {
+        $tag = new Tag;
+        $tag->title = $request->tag_title;
+        $tag->action = $request->tag_action;
+        $tag->save();
+        return redirect()->back();
+    }
+
     /**
      * Display the specified resource.
      *
@@ -61,7 +71,12 @@ class CatController extends Controller
      */
     public function edit(Cat $cat)
     {
-        //
+        return view('admin.category.edit', compact('cat'));
+    }
+
+    public function tagEdit(Tag $tag)
+    {
+        return view('admin.category.tag-edit', compact('tag'));
     }
 
     /**
@@ -73,7 +88,9 @@ class CatController extends Controller
      */
     public function update(Request $request, Cat $cat)
     {
-        //
+        $cat->title = $request->name;
+        // $cat->parent_id = $request->parent_id;
+        $cat->save();
     }
 
     /**
@@ -84,6 +101,7 @@ class CatController extends Controller
      */
     public function destroy(Cat $cat)
     {
-        //
+        $cat->delete();
+        return redirect()->back();
     }
 }

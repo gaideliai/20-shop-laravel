@@ -20,13 +20,15 @@
     <div class="swiper-button-prev"></div>
 </div>
 <div class="container">
-    @foreach ($products as $product)        
+            
     
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+        @foreach ($products as $product)
+        <div class="col-md-4">
+            <div class="card mt-3" style="min-height: 550px">
                 <div class="card-header">{{$product->title}}</div>
                 <div class="card-body">
+                    <div>{{$product->title}}</div>
                     <div>{{$product->price}} Eur</div>
                     <div>{{$product->description}}</div>
                     @foreach ($product->getImages as $image)
@@ -36,15 +38,16 @@
                         <input type="hidden" name="route" value="{{route('front.add-js')}}">
                         <input type="hidden" name="count" value="1">
                         <input type="hidden" name="product_id" value="{{$product->id}}">
-                        <button class="add-to-cart-button" type="button">Dėti į krepšelį</button>
+                        <button class="add-to-cart-button mt-3" type="button">Dėti į krepšelį</button>
                         @csrf
                     </div>
                     
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
+    
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

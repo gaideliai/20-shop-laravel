@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Image;
+use App\Cat;
+use App\Tag;
+use App\Product_tag;
+use App\Product_cat;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -26,7 +30,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+        $cats = Cat::all();
+        $tags = Tag::all();
+        return view('admin.product.create', compact('cats', 'tags'));
     }
 
     /**
@@ -47,7 +53,7 @@ class ProductController extends Controller
             $name = $uploaded_image->getClientOriginalName();
             $destinationPath = public_path('/images/products');
             $uploaded_image->move($destinationPath, $name);
-            // dd($request->image_alt);
+
             $image = new Image;
             $image->image = $name;
             $image->alt = $request->image_alt[$key];
@@ -55,6 +61,24 @@ class ProductController extends Controller
             $image->product_id = $product->id;
             $image->save();            
         }
+
+        $categories = Cat::where('id', $request->cat)->get();
+        foreach ($categories as $category){
+            $productCat = new Product_cat;
+            $productCat->product_id = $product->id;
+            $productCat->cat_id = $category->id;
+            $productCat->save();
+        }
+
+        $tags = Tag::where('id', $request->tag)->get();
+        // dd($tags);
+        foreach ($tags as $tag){
+            $productTag = new Product_tag;
+            $productTag->product_id = $product->id;
+            $productTag->tag_id = $tag->id;
+            $productTag->save();
+        }
+
         return redirect()->route('product.index');
     }
 
@@ -77,7 +101,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $cats = Cat::all();
+        $tags = Tag::all();
+        return view('admin.product.edit', compact('product', 'cats', 'tags'));
     }
 
     /**
@@ -89,7 +115,23 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->title = $request->product_title;
+        $product->price = $request->product_price;
+        $product->description = $request->product_description;
+        $product->save();
+        
+        foreach ($request->file('photo') as $key => $uploaded_image) {
+            $name = $uploaded_image->getClientOriginalName();
+            $destinationPath = public_path('/images/products');
+            $uploaded_image->move($destinationPath, $name);
+
+            $image = $product->getImages();
+            $image->image = $name;
+            $image->alt = $request->image_alt[$key];
+            $image->no = $key;
+            $image->product_id = $product->id;
+            $image->save();            
+        }
     }
 
     /**
@@ -100,6 +142,17 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        foreach ($product->getImages as $photo) {
+            $photo->delete();
+        }
+        foreach ($product->getCat as $cat) {
+            $cat->delete();
+        }
+        foreach ($product->getTag as $tag) {
+            $tag->delete();
+        }
+        $product->delete();     
+      
+        return redirect()->route('product.index');
     }
 }
