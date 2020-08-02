@@ -28,8 +28,18 @@
                             <hr><br>
                             <label>Tags: </label>
                             @foreach ($tags as $tag)
+                                @php   
+                                    $checked=false;
+                                @endphp
                                 <div class="form-check">
-                                    <input type="checkbox" name="tag[]" value="{{$tag->id}}" class="form-check-input" id="{{$tag->id}}">
+                                    @foreach ($product->getTag as $product_tag) 
+                                        @if ($product_tag->tagRelation->id == $tag->id)                                            
+                                            @php
+                                                $checked = true;
+                                            @endphp                                    
+                                        @endif
+                                    @endforeach
+                                    <input type="checkbox" name="tag[]" value="{{$tag->id}}" class="form-check-input" id="{{$tag->id}}" {{$checked?'checked':''}}>
                                     <label for="{{$tag->id}}" class="form-check-label">{{$tag->title}}</label>
                                 </div>
                             @endforeach
@@ -37,9 +47,18 @@
                             
                         </div>
                         <div id="product-photo-inputs-area">
-                            <hr><br><input type="file" name="photo[]"><br>
-                            <label>Alt:</label>
-                            <input type="text" name="image_alt[]" class="form-control">
+                            <hr><br>
+                            @foreach ($product->getImages as $image)
+                                <img src="{{ asset('images/products/'.$image->image) }}" alt="{{$image->alt}}" style="display: block; width: 250px; height: auto;"><br><br>                                
+                                <div class="form-check">
+                                    <input type="checkbox" name="img[]" value="{{$image->id}}" class="form-check-input" id="{{$image->id}}">
+                                    <label for="{{$image->id}}" class="form-check-label">Delete image</label>
+                                </div>
+                                <hr><br>
+                            @endforeach                            
+                            <input type="file" name="photo[]"><br>                            
+                            <label>Alt:</label>                         
+                            <input type="text" name="image_alt[]" value="{{ ($product->getImages->first()->alt) ?? '' }}" class="form-control">
                         </div>
 
 

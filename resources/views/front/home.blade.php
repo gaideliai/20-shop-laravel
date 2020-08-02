@@ -32,7 +32,9 @@
                     <div>{{$product->price}} Eur</div>
                     <div>{{$product->description}}</div>
                     @foreach ($product->getImages as $image)
-                        <img src="{{asset('images/products/'.$image->image)}}" alt="{{$image->alt}}" style="width: 250px; height: auto;">
+                        @if ($image->no==0)
+                            <img src="{{asset('images/products/'.$image->image)}}" alt="{{$image->alt}}" style="width: 250px; height: auto;">
+                        @endif
                     @endforeach
                     <div class="form">
                         <input type="hidden" name="route" value="{{route('front.add-js')}}">
